@@ -1,0 +1,23 @@
+{
+  "name": "weightcore",
+  "version": "1.0.0",
+  "description": "weight data store",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "start.dev": "nodemon"
+  },
+  "author": "Ashley George",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "debug": "^4.0.1",
+    "express": "^4.16.2",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.1.6",
+    "mongoose": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}

@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+    - ./:/usr/src/app
+    - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
+    ports:
+    - "3000:3000"
+    networks:
+    - amazeeio-network
+    - default
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+    - ./data:/data/db
+    ports:
+    - "27017:27017"
+    networks:
+    - amazeeio-network
+    - default
+
+#  mysql:
+#    image: mysql
+#    container_name: mysql-container
+#    ports:
+#    - 6603:3306
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "mypassword"
+#    volumes:
+#    - /db:/var/lib/mysql
+
+networks:
+  amazeeio-network:
+    external: true
