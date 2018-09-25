@@ -1,30 +1,37 @@
-// var http = require('http');
-//
-// var server = http.createServer(function(request, response) {
-//
-//   response.writeHead(200, {"Content-Type": "text/plain"});
-//   response.end("Hello World Not again123!");
-//
-// });
+// var express = require('express');
+// var app = express();
 //
 // var port = 3000;
-// server.listen(port);
 //
-// console.log("Server running at http://localhost:%d", port);
+// var server = app.listen(port, function() {
+//   console.log('Express server listening on port ' + port);
+// });
 
-//
-// var express = require('express'),
-//   app = express(),
-//   port = process.env.PORT || 3000;
-//
-// app.listen(port);
-//
-// console.log('todo list RESTful API server started on: ' + port);
+'use strict';
 
+const express = require('express'),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  db = require('./server/config/db.js'),
+  env = require('./server/config/env');
+//  router = require('./server/router/index');
 
-var app = require('./app');
-var port = 3000;
+const app = express();
+const PORT = env.PORT;
 
-var server = app.listen(port, function() {
-  console.log('Express server listening on port ' + port);
+app.use(morgan('combined'));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.header('Content-Type', 'application/json');
+  next();
+});
+
+//router(app, db);
+
+//drop and resync with { force: true }
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log('Express listening on port:', PORT);
+  });
 });
