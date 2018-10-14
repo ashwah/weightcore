@@ -23,7 +23,7 @@ services:
       MYSQL_PASSWORD: weightcore_password
     volumes:
 #    - /mnt/sequelize-mysql-57-ramdisk:/var/lib/mysql
-    - /mnt/weightcore-mysql:/var/lib/mysql
+    - ./db:/var/lib/mysql
     ports:
     - "6033:3306"
     container_name: mysql-container
