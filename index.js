@@ -1,20 +1,12 @@
-// var express = require('express');
-// var app = express();
-//
-// var port = 3000;
-//
-// var server = app.listen(port, function() {
-//   console.log('Express server listening on port ' + port);
-// });
-
 'use strict';
 
+const mysql = require('mysql');
 const express = require('express'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   db = require('./server/config/db.js'),
-  env = require('./server/config/env');
-//  router = require('./server/router/index');
+  env = require('./server/config/env'),
+  router = require('./server/router/index');
 
 const app = express();
 const PORT = env.PORT;
@@ -27,11 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-//router(app, db);
+router(app, db);
 
 //drop and resync with { force: true }
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log('Express listening on port:', PORT);
   });
 });
+

@@ -14,26 +14,19 @@ services:
     - amazeeio-network
     - default
 
-#  mongo:
-#    container_name: mongo
-#    image: mongo
-#    volumes:
-#    - ./data:/data/db
-#    ports:
-#    - "27017:27017"
-#    networks:
-#    - amazeeio-network
-#    - default
-
   mysql:
-    image: mysql
-    container_name: mysql-container
-    ports:
-    - 6603:3306
+    image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: "mypassword"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: weightcore_db
+      MYSQL_USER: weightcore_user
+      MYSQL_PASSWORD: weightcore_password
     volumes:
-    - /db:/var/lib/mysql
+#    - /mnt/sequelize-mysql-57-ramdisk:/var/lib/mysql
+    - /mnt/weightcore-mysql:/var/lib/mysql
+    ports:
+    - "6033:3306"
+    container_name: mysql-container
 
 networks:
   amazeeio-network:
