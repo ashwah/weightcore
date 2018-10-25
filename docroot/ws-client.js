@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:8081");
+var ws = new WebSocket("ws://167.99.192.47:8081");
 
 ws.onopen = function() {
   setValue('Online');
