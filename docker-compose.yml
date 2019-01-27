@@ -7,15 +7,10 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
     - ./:/usr/src/app
-    - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
     ports:
     - "3000:3000"
     - "8080:80"
     - "8081:8081"
-
-#    networks:
-#    - amazeeio-network
-#    - default
 
   mysql:
     image: mysql:5.7
@@ -24,13 +19,6 @@ services:
       MYSQL_DATABASE: weightcore_db
       MYSQL_USER: weightcore_user
       MYSQL_PASSWORD: weightcore_password
-#    volumes:
-##    - /mnt/sequelize-mysql-57-ramdisk:/var/lib/mysql
-#    - ./db:/var/lib/mysql
     ports:
     - "6033:3306"
     container_name: mysql-container
-
-#networks:
-#  amazeeio-network:
-#    external: true
